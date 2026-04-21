@@ -1,0 +1,28 @@
+Train: 27989 Dev: 5998 Test: 5998
+alpha=0.1 | DEV accuracy=0.7873
+alpha=0.3 | DEV accuracy=0.7861
+alpha=0.5 | DEV accuracy=0.7858
+alpha=1.0 | DEV accuracy=0.7843
+
+ Best alpha: 0.1
+
+====================
+FINAL TEST RESULTS
+====================
+Accuracy TEST: 0.7962654218072691
+              precision    recall  f1-score   support
+
+           0       0.66      0.83      0.73      2045
+           1       0.90      0.78      0.83      3953
+
+    accuracy                           0.80      5998
+   macro avg       0.78      0.80      0.78      5998
+weighted avg       0.82      0.80      0.80      5998
+
+
+====================
+TEST
+====================
+Text: 老是在关键时刻强制弹出广告 😡😡
+Prediction: 0
+Probabilities: [0.77604514 0.22395486]

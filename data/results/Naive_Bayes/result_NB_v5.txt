@@ -1,0 +1,36 @@
+Aperçu des données :
+   rating                 review_content  ...         game_name sentiment
+0       5            可以体验一下，剧情不错，但可能会有点迷  ...  7_years_from_now         1
+1       5                           剧情很好  ...  7_years_from_now         1
+2       5  刺激，感受到了友情，亲情，自我，爱慕，传承，等待 ，与纯真  ...  7_years_from_now         1
+3       5            毋庸置疑的神作 第一次回溯时间的是葵啊  ...  7_years_from_now         1
+4       5                   没有别的可以说，剧情神作  ...  7_years_from_now         1
+
+[5 rows x 7 columns]
+
+Colonnes disponibles : Index(['rating', 'review_content', 'likes', 'publish_time', 'device_model',
+       'game_name', 'sentiment'],
+      dtype='str')
+
+====================
+Résultats
+====================
+Accuracy : 0.8144304114042766
+
+Rapport de classification :
+              precision    recall  f1-score   support
+
+           0       0.76      0.67      0.71      2726
+           1       0.84      0.89      0.86      5271
+
+    accuracy                           0.81      7997
+   macro avg       0.80      0.78      0.79      7997
+weighted avg       0.81      0.81      0.81      7997
+
+
+====================
+Test personnalisé
+====================
+Texte : 烂游戏，讨厌死了，天天弹广告
+Prédiction : 0
+Probabilités [0,1] : [0.81381258 0.18618742]
