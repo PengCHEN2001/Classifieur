@@ -31,6 +31,19 @@ weighted avg       0.71      0.70      0.64      7997
 ====================
 Test personnalisé
 ====================
-Texte : this game is really fun and addictive
+
+Texte : 烂游戏，讨厌死了，天天弹广告
+Prédiction : 0
+Probabilités [0,1] : [0.77527605 0.22472395]
+
+Texte : 老是在关键时刻强制弹出广告 😡😡
+Prédiction : 1
+Probabilités [0,1] : [0.34094035 0.65905965]
+
+Texte : 我可太喜欢这剧情了，太感人了
+Prédiction : 1
+Probabilités [0,1] : [0.34094035 0.65905965]
+
+Texte : 角色好可爱！我要抽爆新角色！！！
 Prédiction : 1
 Probabilités [0,1] : [0.34094035 0.65905965]

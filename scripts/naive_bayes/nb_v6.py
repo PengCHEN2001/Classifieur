@@ -139,12 +139,20 @@ def predict_sentiment(text):
 # =========================
 # 10. TEST
 # =========================
-example = "老是在关键时刻强制弹出广告 😡😡"
-pred, proba = predict_sentiment(example)
-
 print("\n====================")
-print("TEST")
+print("Test personnalisé")
 print("====================")
-print("Text:", example)
-print("Prediction:", pred)
-print("Probabilities:", proba)
+
+test_comments = [
+    "烂游戏，讨厌死了，天天弹广告", 
+    "老是在关键时刻强制弹出广告 😡😡",
+    "我可太喜欢这剧情了，太感人了",
+    "角色好可爱！我要抽爆新角色！！！"
+    ]
+
+for test_comment in test_comments :
+    pred, proba = predict_sentiment(test_comment)
+    print("")
+    print("Texte :", test_comment)
+    print("Prédiction :", pred)
+    print("Probabilités [0,1] :", proba)
