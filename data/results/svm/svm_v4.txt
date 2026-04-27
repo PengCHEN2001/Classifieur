@@ -26,7 +26,74 @@ Accuracy: 0.7836688758284357
    macro avg       0.76      0.79      0.77      7997
 weighted avg       0.80      0.78      0.79      7997
 
-烂游戏，讨厌死了，天天弹广告 -> 0
-老是在关键时刻强制弹出广告 😡😡 -> 0
-我可太喜欢这剧情了，太感人了 -> 1
-角色好可爱！我要抽爆新角色！！！ -> 1
+
+====================
+Test personnalisé
+====================
+
+Texte :  烂游戏，讨厌死了，天天弹广告
+Prédiction :  0
+Probabilités :  [0.86827584 0.13172416]
+
+Texte :  老是在关键时刻强制弹出广告 😡😡
+Prédiction :  0
+Probabilités :  [0.78074222 0.21925778]
+
+Texte :  我可太喜欢这剧情了，太感人了
+Prédiction :  1
+Probabilités :  [0.11076662 0.88923338]
+
+Texte :  角色好可爱！我要抽爆新角色！！！
+Prédiction :  1
+Probabilités :  [0.06767382 0.93232618]
+
+## ---------------------------------------- ##
+
+Train size: 23991
+Dev size: 7997
+Test size: 7997
+Meilleurs paramètres : {'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}
+
+=== DEV RESULTS ===
+Accuracy: 0.7984244091534325
+              precision    recall  f1-score   support
+
+           0       0.73      0.65      0.69      2727
+           1       0.83      0.87      0.85      5270
+
+    accuracy                           0.80      7997
+   macro avg       0.78      0.76      0.77      7997
+weighted avg       0.79      0.80      0.80      7997
+
+
+=== FINAL TEST RESULTS ===
+Accuracy: 0.7904214080280105
+              precision    recall  f1-score   support
+
+           0       0.71      0.65      0.68      2726
+           1       0.83      0.86      0.84      5271
+
+    accuracy                           0.79      7997
+   macro avg       0.77      0.76      0.76      7997
+weighted avg       0.79      0.79      0.79      7997
+
+
+====================
+Test personnalisé
+====================
+
+Texte :  烂游戏，讨厌死了，天天弹广告
+Prédiction :  0
+Probabilités :  [0.90467111 0.09532889]
+
+Texte :  老是在关键时刻强制弹出广告 😡😡
+Prédiction :  0
+Probabilités :  [0.64185611 0.35814389]
+
+Texte :  我可太喜欢这剧情了，太感人了
+Prédiction :  1
+Probabilités :  [0.09221919 0.90778081]
+
+Texte :  角色好可爱！我要抽爆新角色！！！
+Prédiction :  1
+Probabilités :  [0.11456982 0.88543018]

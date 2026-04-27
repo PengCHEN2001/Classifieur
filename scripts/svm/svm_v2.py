@@ -13,7 +13,7 @@ df = pd.read_csv("../../data/taptap_game_reviews.csv")
 # 2. Garder uniquement les colonnes utiles
 df = df[["review_content", "sentiment"]].dropna()
 
-# 3. Stopwords chinois (exemple minimal, tu peux enrichir)
+# 3. Stopwords chinois 
 stopwords = set([
     "的", "了", "和", "是", "我", "也", "很", "就", "都", "而", "及", "与", "着"
 ])
@@ -54,7 +54,8 @@ X_test_vec = vectorizer.transform(X_test)
 # 8. SVM avec gestion déséquilibre
 model = SVC(
     kernel="linear",
-    class_weight="balanced"
+    class_weight="balanced",
+    probability=True
 )
 
 model.fit(X_train_vec, y_train)
@@ -67,6 +68,28 @@ print("Accuracy:", accuracy_score(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 
 # 11. Nouveaux commentaires à tester
+# TEST : nouvelle prédiction
+def predict_sentiment(text, model, vectorizer):
+    # même preprocessing qu'avant !
+    text = re.sub(r"[^\u4e00-\u9fff]", "", str(text))
+    words = jieba.cut(text)
+    words = [w for w in words if w not in stopwords and len(w) > 1]
+    text = " ".join(words)
+
+    # vectorisation (IMPORTANT : transform seulement)
+    text_vec = vectorizer.transform([text])
+
+    # prédiction
+    pred = model.predict(text_vec)[0]
+    proba = model.predict_proba(text_vec)[0]
+
+    return pred, proba
+
+print("\n====================")
+print("Test personnalisé")
+print("====================")
+
+
 new_comment = [
     "烂游戏，讨厌死了，天天弹广告",
     "老是在关键时刻强制弹出广告 😡😡",
@@ -74,16 +97,9 @@ new_comment = [
     "角色好可爱！我要抽爆新角色！！！"
 ]
 
-# 12. Préprocessing (identique à l'entraînement)
-new_comment_clean = [preprocess(text) for text in new_comment]
-
-# 13. Vectorisation (⚠️ transform seulement)
-new_comment_vec = vectorizer.transform(new_comment_clean)
-
-# 14. Prédictions
-predictions = model.predict(new_comment_vec)
-
-# 15. Affichage
-for text, pred in zip(new_comment, predictions):
-    sentiment = "1" if pred == 1 else "0"
-    print(f"{text} -> {sentiment}")
+for c in new_comment:
+    pred, proba = predict_sentiment(c, model, vectorizer)
+    print("")
+    print("Texte : ",  c)
+    print("Prédiction : ", pred)
+    print("Probabilités : ", proba)

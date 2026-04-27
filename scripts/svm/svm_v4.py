@@ -50,13 +50,20 @@ X_dev_vec = vectorizer.transform(X_dev)
 X_test_vec = vectorizer.transform(X_test)
 
 # 7. GridSearch sur TRAIN (validation interne = DEV via CV)
-param_grid = {
-    "C": [0.5, 1, 5],
-    "kernel": ["linear"],
-}
+param_grid = [
+    {
+        "C": [0.5, 1, 5],
+        "kernel": ["linear"],
+    },
+    {
+        "C" : [0.1, 1, 10],
+        "kernel" : ["rbf"],    # Ajout rbf pour v4.1
+        'gamma' : ['scale', 'auto']
+    }
+]
 
 grid = GridSearchCV(
-    SVC(class_weight="balanced"),
+    SVC(class_weight="balanced", probability=True),
     param_grid,
     cv=3,
     scoring="f1",
@@ -82,7 +89,7 @@ y_final = pd.concat([y_train, y_dev])
 # IMPORTANT : refit vectorizer sur train+dev
 X_final_vec = vectorizer.fit_transform(X_final)
 
-final_model = SVC(**grid.best_params_, class_weight="balanced")
+final_model = SVC(**grid.best_params_, class_weight="balanced", probability=True)
 final_model.fit(X_final_vec, y_final)
 
 # 10. Transformation du test (sans refit !)
@@ -108,8 +115,14 @@ def predict_sentiment(text, model, vectorizer):
 
     # prédiction
     pred = model.predict(text_vec)[0]
+    proba = model.predict_proba(text_vec)[0]
 
-    return pred
+    return pred, proba
+
+print("\n====================")
+print("Test personnalisé")
+print("====================")
+
 
 new_comment = [
     "烂游戏，讨厌死了，天天弹广告",
@@ -119,4 +132,8 @@ new_comment = [
 ]
 
 for c in new_comment:
-    print(c, "->", predict_sentiment(c, final_model, vectorizer))
+    pred, proba = predict_sentiment(c, final_model, vectorizer)
+    print("")
+    print("Texte : ",  c)
+    print("Prédiction : ", pred)
+    print("Probabilités : ", proba)

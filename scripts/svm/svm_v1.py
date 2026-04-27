@@ -33,7 +33,7 @@ X_train_vec = vectorizer.fit_transform(X_train)
 X_test_vec = vectorizer.transform(X_test)
 
 # 7. Modèle SVM
-model = SVC(kernel="linear")  # linear souvent meilleur pour texte
+model = SVC(kernel="linear", probability=True)  # linear souvent meilleur pour texte
 model.fit(X_train_vec, y_train)
 
 # 8. Prédiction
@@ -51,16 +51,37 @@ new_comment = [
     "角色好可爱！我要抽爆新角色！！！"
 ]
 
-# 11. Préprocessing (même que train)
-new_comment_cut = [jieba_tokenizer(text) for text in new_comment]
 
-# 12. Vectorisation (IMPORTANT : transform seulement)
-new_comment_vec = vectorizer.transform(new_comment_cut)
+# TEST : nouvelle prédiction
+def predict_sentiment(text, model, vectorizer):
+    # même preprocessing qu'avant !
+    words = jieba.cut(text)
+    text = " ".join(words)
 
-# 13. Prédictions
-predictions = model.predict(new_comment_vec)
+    # vectorisation (IMPORTANT : transform seulement)
+    text_vec = vectorizer.transform([text])
 
-# 14. Affichage
-for text, pred in zip(new_comment, predictions):
-    sentiment = "1" if pred == 1 else "0"
-    print(f"{text} -> {sentiment}")
+    # prédiction
+    pred = model.predict(text_vec)[0]
+    proba = model.predict_proba(text_vec)[0]
+
+    return pred, proba
+
+print("\n====================")
+print("Test personnalisé")
+print("====================")
+
+
+new_comment = [
+    "烂游戏，讨厌死了，天天弹广告",
+    "老是在关键时刻强制弹出广告 😡😡",
+    "我可太喜欢这剧情了，太感人了",
+    "角色好可爱！我要抽爆新角色！！！"
+]
+
+for c in new_comment:
+    pred, proba = predict_sentiment(c, model, vectorizer)
+    print("")
+    print("Texte : ",  c)
+    print("Prédiction : ", pred)
+    print("Probabilités : ", proba)
