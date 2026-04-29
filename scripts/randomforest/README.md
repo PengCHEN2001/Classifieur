@@ -1,0 +1,1 @@
+Les fichiers de modèle générés par WEKA pour Random Forest n’ont pas pu être déposés sur GitHub en raison de leur taille trop importante, supérieure à la limite autorisée par la plateforme. Les paramètres utilisés, les jeux de données ainsi que les résultats expérimentaux ont toutefois été conservés afin de permettre la reproductibilité des expériences.
