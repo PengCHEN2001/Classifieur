@@ -1,0 +1,3 @@
+- preprocess.py : prétraitement des données pour WEKA et génération des fichiers ARFF  
+- votedperceptron/ et randomforest/ : modèles entraînés avec WEKA  
+- svm/ et naive_bayes/ : scripts Python (scikit-learn) pour les modèles SVM et Naïve Bayes
